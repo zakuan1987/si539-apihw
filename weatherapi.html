@@ -26,19 +26,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     function gettingJSON(){
-    	// console.log("Hi")
-    	// Use the OpenWeather API to return:
         let APPID = "ee5ad40f308d76cff56a8ee4d7132672";
 		let query = "https://api.openweathermap.org/data/2.5/weather";
         let iconURL="https://openweathermap.org/img/wn/"
-    	//  the current temperature
-    	//  the high temperature for the day
-    	//  the low temperature for the day
-    	//  the icon for the current weather.
-    	// You will need to update this query with the city, weather format (Celsius or Fahrenheit) and your OpenWeatherMap ID
-
-    	// Right now I have it set to Chicago.  The default should be Ann Abor/Fahreheit.
-
         console.log("Query is :" + query);
 		if ($("#location").val() != ""){
 		var weatherupdate = {
@@ -49,38 +39,24 @@
 			 weatherupdate = {
 				"q": "Ann Arbor",
 				"APPID": APPID
-			}
-		}
-
-// JSON data saved in wetaherupdate variable.
-
-        $.getJSON(query,data=weatherupdate,function(json){
+			}}
+        $.getJSON(query,data=weatherupdate,function(json){                  // JSON data saved in wetaherupdate variable.
             console.log(JSON.stringify(json));
             document.querySelector("div").style.display = "block";
             console.log(json.weather[0].icon);
-            $("#tempImg").attr("src",iconURL+json.weather[0].icon+"@2x.png");
-
-    })
+            $("#tempImg").attr("src",iconURL+json.weather[0].icon+"@2x.png");})
 			.done(function (data) {
-				$("#loc").html(data.name)      // loc id
-
-            // convertion between celcius and fahrenhit
-
-				if($("#celcius:checked").val() == "metric"){
-					$("#temp").html((data.main.temp - 273.15).toFixed(2))
+				$("#loc").html(data.name)                                       // loc id
+				if($("#celcius:checked").val() == "metric"){                               // convertion between celcius and fahrenhit
+                    $("#temp").html((data.main.temp - 273.15).toFixed(2))
 					$("#high").html((data.main.temp_max - 273.15).toFixed(2))
 					$("#low").html((data.main.temp_min - 273.15).toFixed(2))
 
 				} else{
-					$("#temp").html(((data.main.temp - 273.15) * 9 / 5 + 32).toFixed(2))
-					$("#high").html(((data.main.temp_max - 273.15) * 9 / 5 + 32).toFixed(2))
-					$("#low").html(((data.main.temp_min - 273.15) * 9 / 5 + 32).toFixed(2))
-				}
-
-
-			})
-
-    }
+					$("#temp").html(((data.main.temp - 273.15) * 9 / 5 + (32)).toFixed(2))
+					$("#high").html(((data.main.temp_max - 273.15) * 9 / 5 + (32)).toFixed(2))
+					$("#low").html(((data.main.temp_min - 273.15) * 9 / 5 + (32)).toFixed(2))
+				}})}
     </script>
 </head>
 <body>
